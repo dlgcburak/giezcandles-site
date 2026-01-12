@@ -1,0 +1,40 @@
+
+> giez-next-payload@ build C:\Users\omerk\Desktop\giezcandles-site
+> next build
+
+   Γû▓ Next.js 15.4.10
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 12.0s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/7) ...
+   Generating static pages (1/7) 
+   Generating static pages (3/7) 
+   Generating static pages (5/7) 
+ Γ£ô Generating static pages (7/7)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+Γöî Γùï /                                      186 B         115 kB
+Γö£ Γùï /_not-found                             1 kB         103 kB
+Γö£ ΓùÅ /[slug]                                179 B         110 kB
+Γö£   Γöö /home
+Γö£ ╞Æ /admin/[[...segments]]                 658 B         756 kB
+Γö£ ╞Æ /api/[...slug]                         178 B         102 kB
+Γö£ ╞Æ /api/graphql                           133 B         102 kB
+Γö£ ╞Æ /api/graphql-playground                178 B         102 kB
+Γö£ ╞Æ /api/setup                             133 B         102 kB
+Γöö ╞Æ /edit                                2.59 kB         109 kB
++ First Load JS shared by all             102 kB
+  Γö£ chunks/4496-156d7e495959fd5d.js      44.2 kB
+  Γö£ chunks/60c63bc8-8384237d2ee9f714.js  54.1 kB
+  Γöö other shared chunks (total)          3.34 kB
+
+
+Γùï  (Static)   prerendered as static content
+ΓùÅ  (SSG)      prerendered as static HTML (uses generateStaticParams)
+╞Æ  (Dynamic)  server-rendered on demand
+

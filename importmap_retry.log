@@ -1,0 +1,16 @@
+Generating import map
+[Function: PayloadIcon]
+C:\Users\omerk\Desktop\giezcandles-site\node_modules\.pnpm\payload@3.70.0_graphql@16.12.0_typescript@5.9.3\node_modules\payload\src\bin\generateImportMap\index.ts:94
+      throw new Error('addToImportMap > Payload component must be an object or a string')
+            ^
+
+
+Error: addToImportMap > Payload component must be an object or a string
+    at addToImportMap (C:\Users\omerk\Desktop\giezcandles-site\node_modules\.pnpm\payload@3.70.0_graphql@16.12.0_typescript@5.9.3\node_modules\payload\src\bin\generateImportMap\index.ts:94:13)
+    at iterateConfig (C:\Users\omerk\Desktop\giezcandles-site\node_modules\.pnpm\payload@3.70.0_graphql@16.12.0_typescript@5.9.3\node_modules\payload\src\bin\generateImportMap\iterateConfig.ts:61:3)
+    at generateImportMap (C:\Users\omerk\Desktop\giezcandles-site\node_modules\.pnpm\payload@3.70.0_graphql@16.12.0_typescript@5.9.3\node_modules\payload\src\bin\generateImportMap\index.ts:116:3)
+    at async runBinScript (C:\Users\omerk\Desktop\giezcandles-site\node_modules\.pnpm\payload@3.70.0_graphql@16.12.0_typescript@5.9.3\node_modules\payload\dist\bin\index.js:121:9)
+    at async bin (C:\Users\omerk\Desktop\giezcandles-site\node_modules\.pnpm\payload@3.70.0_graphql@16.12.0_typescript@5.9.3\node_modules\payload\dist\bin\index.js:44:29)
+    at async start (file:///C:/Users/omerk/Desktop/giezcandles-site/node_modules/.pnpm/payload@3.70.0_graphql@16.12.0_typescript@5.9.3/node_modules/payload/bin.js:30:7)
+
+Node.js v22.18.0

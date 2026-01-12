@@ -1,0 +1,38 @@
+{
+  "name": "giez-next-payload",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "tsx --test tests/**/*.test.ts",
+    "seed": "node --loader tsx ./scripts/seed.ts"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.70.0",
+    "@payloadcms/live-preview-react": "^3.70.0",
+    "@payloadcms/next": "^3.70.0",
+    "@payloadcms/richtext-lexical": "^3.70.0",
+    "@payloadcms/storage-s3": "^3.70.0",
+    "graphql": "^16.9.0",
+    "next": "15.4.10",
+    "payload": "^3.70.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "dotenv": "^17.2.3",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "15.0.0",
+    "sass": "^1.77.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.3"
+  },
+  "packageManager": "pnpm@9.15.2"
+}

@@ -1,0 +1,24 @@
+
+> giez-next-payload@ build C:\Users\omerk\Desktop\giezcandles-site
+> next build
+
+   Γû▓ Next.js 15.4.10
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 12.0s
+   Linting and checking validity of types ...
+Failed to compile.
+
+./scripts/migrate-home.ts:55:25
+Type error: Property 'direction' is missing in type '{ type: string; format: ""; indent: number; version: number; children: { type: string; tag: string; format: string; indent: number; version: number; children: { type: string; text: string; version: number; }[]; }[]; }' but required in type '{ type: string; children: { [k: string]: unknown; type: any; version: number; }[]; direction: "ltr" | "rtl" | null; format: "" | "center" | "left" | "right" | "end" | "start" | "justify"; indent: number; version: number; }'.
+
+  53 |                     blockType: 'archive',
+  54 |                     introContent: {
+> 55 |                         root: {
+     |                         ^
+  56 |                             type: 'root',
+  57 |                             format: '',
+  58 |                             indent: 0,
+Next.js build worker exited with code: 1 and signal: null
+ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.

@@ -1,0 +1,24 @@
+
+> giez-next-payload@ build C:\Users\omerk\Desktop\giezcandles-site
+> next build
+
+   Γû▓ Next.js 15.4.10
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 17.0s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/6) ...
+   Generating static pages (1/6) 
+   Generating static pages (2/6) 
+   Generating static pages (4/6) 
+Error occurred prerendering page "/home". Read more: https://nextjs.org/docs/messages/prerender-error
+TypeError: Cannot read properties of null (reading 'title')
+    at archive (C:\Users\omerk\Desktop\giezcandles-site\.next\server\app\(site)\[slug]\page.js:2:11099)
+    at stringify (<anonymous>) {
+  digest: '3625319550'
+}
+Export encountered an error on /(site)/[slug]/page: /home, exiting the build.
+ Γ¿» Next.js build worker exited with code: 1 and signal: null
+ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.
