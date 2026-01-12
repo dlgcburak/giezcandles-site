@@ -70,16 +70,11 @@ export const SiteHeader: React.FC<Props> = ({ settings }) => {
                             )
                         })}
 
-                        {/* Default fallback if empty */}
+                        {/* Default fallback if no navItems configured in admin */}
                         {navItems.length === 0 && (
-                            <>
-                                <Link href="/#urunler">Ürünler</Link>
-                                <Link href="/#hikaye">Hikaye</Link>
-                                <Link href="/#iletisim">İletişim</Link>
-                                <a className="btn primary small" href={`https://wa.me/${settings.whatsappNumber?.replace(/\D/g, '') || ''}`}>
-                                    Sipariş Ver
-                                </a>
-                            </>
+                            <a className="btn primary small" href={`https://wa.me/${settings.whatsappNumber?.replace(/\D/g, '') || ''}`}>
+                                Sipariş Ver
+                            </a>
                         )}
                     </nav>
 
@@ -101,21 +96,23 @@ export const SiteHeader: React.FC<Props> = ({ settings }) => {
                             const href = getHref(item)
                             const isButton = item.appearance === 'button'
                             return (
-                                <Link
+                                <a
                                     key={i}
                                     href={href}
                                     className={isButton ? 'btn primary' : ''}
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     {item.label}
-                                </Link>
+                                </a>
                             )
                         }) : (
-                            <>
-                                <Link href="/#urunler" onClick={() => setMobileMenuOpen(false)}>Ürünler</Link>
-                                <Link href="/#hikaye" onClick={() => setMobileMenuOpen(false)}>Hikaye</Link>
-                                <Link href="/#iletisim" onClick={() => setMobileMenuOpen(false)}>İletişim</Link>
-                            </>
+                            <a
+                                className="btn primary"
+                                href={`https://wa.me/${settings.whatsappNumber?.replace(/\D/g, '') || ''}`}
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Sipariş Ver
+                            </a>
                         )}
                     </div>
                 </div>

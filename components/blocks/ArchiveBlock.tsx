@@ -7,10 +7,13 @@ import { Media } from '@/payload-types'
 type Product = {
     id: string
     title: string
+    slug?: string
     priceTRY: number
     image?: Media | null
     fallbackImage?: string
     collection?: any
+    showDetailsButton?: boolean
+    pricePosition?: 'bottom' | 'overlay'
 }
 
 type Props = {
@@ -27,9 +30,19 @@ const ProductCard = ({ product }: { product: Product }) => {
         ? product.image.url
         : (product.fallbackImage ? `/images/${product.fallbackImage}` : '/images/logo.png')
 
+    // Use slug for URL, fallback to id if slug doesn't exist
+    const productHref = `/product/${product.slug || product.id}`
+
+    // Show button by default (true) unless explicitly set to false
+    const showButton = product.showDetailsButton !== false
+
+    // Price position: 'bottom' (default) or 'overlay'
+    const pricePosition = product.pricePosition || 'bottom'
+    const isOverlayPrice = pricePosition === 'overlay'
+
     return (
         <article className="card product">
-            <div className="media">
+            <div className="media" style={{ position: 'relative' }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                     <Image
                         src={imageUrl}
@@ -38,26 +51,44 @@ const ProductCard = ({ product }: { product: Product }) => {
                         style={{ objectFit: 'cover' }}
                     />
                 </div>
+                {/* Overlay Price */}
+                {isOverlayPrice && (
+                    <div style={{
+                        position: 'absolute',
+                        top: 12,
+                        right: 12,
+                        background: 'rgba(72, 24, 40, 0.9)',
+                        color: '#fff',
+                        padding: '6px 12px',
+                        borderRadius: 6,
+                        fontSize: 14,
+                        fontWeight: 600,
+                        backdropFilter: 'blur(4px)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                    }}>
+                        ₺ {product.priceTRY}
+                    </div>
+                )}
             </div>
             <div className="body">
                 <h3>{product.title}</h3>
                 <div className="meta">
                     {/* Tags mocked or from product if available */}
                     <span className="pill">El yapımı</span>
-                    <span className="price">₺ {product.priceTRY}</span>
+                    {/* Bottom Price - only show if not overlay */}
+                    {!isOverlayPrice && (
+                        <span className="price">₺ {product.priceTRY}</span>
+                    )}
                 </div>
             </div>
-            <div className="actions">
-                {/* 
-                  Note: The original had 'Fotoğrafı Aç' which requires Lightbox state.
-                  Blocks are stateless. We might need a Global Context for Lightbox 
-                  or just link to the product page in this new architecture.
-                  Transitioning to Product Page link for better UX in CMS structure.
-                */}
-                <Link className="btn primary" href={`/product/${product.id}`} style={{ flex: 1, textAlign: 'center' }}>
-                    İncele
-                </Link>
-            </div>
+            {/* Actions - only show if showButton is true */}
+            {showButton && (
+                <div className="actions">
+                    <Link className="btn primary" href={productHref} style={{ flex: 1, textAlign: 'center' }}>
+                        İncele
+                    </Link>
+                </div>
+            )}
         </article>
     )
 }

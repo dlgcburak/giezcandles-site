@@ -115,6 +115,35 @@ export const Products: CollectionConfig = {
                 description: 'Arama yapılırken ürünün bulunmasını kolaylaştırır.',
               },
             },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'showDetailsButton',
+                  label: 'İncele Butonu Göster',
+                  type: 'checkbox',
+                  defaultValue: true,
+                  admin: {
+                    width: '50%',
+                    description: 'Ürün kartında "İncele" butonunu göster/gizle.',
+                  },
+                },
+                {
+                  name: 'pricePosition',
+                  label: 'Fiyat Konumu',
+                  type: 'select',
+                  defaultValue: 'bottom',
+                  options: [
+                    { label: 'Alt Kısımda (Klasik)', value: 'bottom' },
+                    { label: 'Görsel Üzerinde (Overlay)', value: 'overlay' },
+                  ],
+                  admin: {
+                    width: '50%',
+                    description: 'Fiyatın ürün kartındaki konumunu belirler.',
+                  },
+                },
+              ],
+            },
           ],
         },
         {

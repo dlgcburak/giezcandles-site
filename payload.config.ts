@@ -73,6 +73,7 @@ export default buildConfig({
         Logo: './components/PayloadLogo',
         Icon: './components/PayloadIcon',
       },
+      beforeDashboard: ['./components/DashboardWelcome'],
     },
   },
 
