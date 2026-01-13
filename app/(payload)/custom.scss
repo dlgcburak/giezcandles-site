@@ -62,18 +62,14 @@ body {
 }
 
 /* 1.1 FIX OVERSIZED ICONS (CRITICAL) */
-svg {
-  max-width: 100%;
-  max-height: 100%;
-}
-
+/* Only target specific icons with specific classes to avoid breaking UI internals */
 .icon--drag-handle,
 .icon--chevron,
 .icon--plus,
 .icon--x {
-  width: 14px !important;
-  height: 14px !important;
-  display: inline-block !important;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
 }
 
 /* Fix for giant icons in collapsibles */
@@ -163,26 +159,25 @@ textarea:focus,
   color: var(--brand-900) !important;
 }
 
-/* 3.2. FIX SEARCH ICON OVERLAP (AS SEEN IN SCREENSHOT) */
+/* 3.2. FIX SEARCH ICON OVERLAP */
 .list-controls__search {
-  position: relative !important;
+  position: relative;
 }
 
 .list-controls__search svg {
-  position: absolute !important;
-  left: 12px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 16px !important;
-  height: 16px !important;
-  color: var(--brand-900) !important;
-  pointer-events: none !important;
-  z-index: 10 !important;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--brand-900);
+  pointer-events: none;
+  z-index: 10;
 }
 
 .list-controls__search input {
-  padding-left: 38px !important;
-  /* Ensure text doesn't overlap icon */
+  padding-left: 38px !important; /* Force padding to clear icon */
 }
 
 .react-select__menu {
@@ -206,41 +201,41 @@ textarea:focus,
 
 /* 4. SIDEBAR & NAVIGATION (LUXURY FEEL) */
 aside.nav {
-  background: rgba(243, 240, 234, 0.45) !important;
-  backdrop-filter: blur(25px) !important;
-  border-right: 1px solid rgba(72, 24, 40, 0.08) !important;
+  background: rgba(243, 240, 234, 0.45);
+  backdrop-filter: blur(25px);
+  border-right: 1px solid rgba(72, 24, 40, 0.08);
 }
 
 .nav-group__link {
-  font-size: 0.85rem !important;
-  font-weight: 500 !important;
-  color: var(--brand-700) !important;
-  border-radius: 0 !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--brand-700);
+  border-radius: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-group__link:hover {
-  background: rgba(72, 24, 40, 0.04) !important;
-  color: var(--brand-900) !important;
-  padding-left: 1.5rem !important;
+  background: rgba(72, 24, 40, 0.04);
+  color: var(--brand-900);
+  padding-left: 1.5rem;
 }
 
 .nav-group__link.active {
-  background: transparent !important;
-  color: var(--brand-900) !important;
-  font-weight: 700 !important;
-  border-left: 3px solid var(--brand-900) !important;
+  background: transparent;
+  color: var(--brand-900);
+  font-weight: 700;
+  border-left: 3px solid var(--brand-900);
 }
 
-/* 4.1. FIX SIDEBAR OVERLAP (CRITICAL) */
+/* 4.1. FIX SIDEBAR OVERLAP */
 .nav-group__content {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.25rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .nav__scroll {
-  display: block !important;
+  /* Do not force block, let Payload handle scroll */
 }
 
 /* 5. GENTLE GLASS CONTAINERS */
