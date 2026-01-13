@@ -2,6 +2,5 @@ node_modules
 .next
 .env
 dist
-payload-types.ts
 public/media
 .env.local
