@@ -58,8 +58,17 @@ export const HeroBlock: React.FC<Props> = ({ title, subtitle, images }) => {
                 <div className="card heroVisual" aria-label="Öne çıkan görseller">
                     <div className="stack">
                         {thumbImages.map((item, index) => {
-                            const imgUrl = typeof item.image === 'string' ? item.image : item.image?.url
+                            // Defensive check: ensure item.image is an object with a url
+                            const imgUrl = (item.image && typeof item.image === 'object' && 'url' in item.image) ? item.image.url : null
                             const imgAlt = item.alt || 'Giez Candle Hero Image'
+
+                            if (!item.image) return null
+
+                            if (typeof item.image === 'string') {
+                                console.warn('HeroBlock: Image is a string ID, not populated media object.', item.image)
+                                return null
+                            }
+
 
                             if (!imgUrl) return null
 

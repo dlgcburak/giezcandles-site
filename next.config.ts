@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
         hostname: 'xkdwmppsvygzujndpjca.storage.supabase.co',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/api/media/**',
+      },
     ],
   },
   sassOptions: {

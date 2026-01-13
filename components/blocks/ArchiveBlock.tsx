@@ -21,12 +21,13 @@ type Props = {
     populateBy: 'collection' | 'selection'
     selectedDocs?: Product[]
     populatedDocs?: Product[]
-    relation?: any // The collection object if populateBy === 'collection'
+    relations?: any[] // Array of collection objects if populateBy === 'collection'
+    populatedRelations?: any[] // Populated collection objects with order
 }
 
 const ProductCard = ({ product }: { product: Product }) => {
     // Resolve Image URL
-    const imageUrl = typeof product.image === 'object' && product.image?.url
+    const imageUrl = (product.image && typeof product.image === 'object' && 'url' in product.image && product.image.url)
         ? product.image.url
         : (product.fallbackImage ? `/images/${product.fallbackImage}` : '/images/logo.png')
 
@@ -93,45 +94,24 @@ const ProductCard = ({ product }: { product: Product }) => {
     )
 }
 
-export const ArchiveBlock: React.FC<Props> = ({ introContent, selectedDocs, populatedDocs, relation }) => {
+export const ArchiveBlock: React.FC<Props> = ({ introContent, selectedDocs, populatedDocs, populatedRelations }) => {
     const products = populatedDocs || selectedDocs || []
-    const collectionTitle = (relation && typeof relation === 'object') ? relation.title : null
+    // Get collection titles for display (if needed)
+    const collectionTitles = populatedRelations?.map(r => typeof r === 'object' ? r.title : null).filter(Boolean) || []
 
     return (
         <section id="urunler" className="container" style={{ paddingTop: '40px', paddingBottom: '60px' }}>
             {/* Intro Content (Rich Text) handles Section Title */}
             {introContent && (
-                <div className="sectionTitle" style={{ marginBottom: collectionTitle ? '10px' : '30px' }}>
+                <div className="sectionTitle" style={{ marginBottom: '30px' }}>
                     <div style={{ flex: 1 }}>
                         <h2 style={{ fontSize: '32px', marginBottom: '8px' }}>Koleksiyonlar</h2>
-                        <p style={{ display: 'none' }}>{/* Hidden if we have collection title below */}</p>
+                        {collectionTitles.length > 0 && (
+                            <p style={{ color: 'var(--muted)', fontSize: 14 }}>
+                                {collectionTitles.join(' • ')}
+                            </p>
+                        )}
                     </div>
-                </div>
-            )}
-
-            {collectionTitle && (
-                <div style={{ gridColumn: "span 12", padding: "2px 4px", marginBottom: "24px" }}>
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "flex-end",
-                            justifyContent: "space-between",
-                            gap: 12,
-                            margin: "8px 0 4px",
-                        }}
-                    >
-                        <h3
-                            style={{
-                                margin: 0,
-                                fontFamily: "'Playfair Display',serif",
-                                fontSize: 24,
-                                color: "var(--brand-900)",
-                            }}
-                        >
-                            {collectionTitle}
-                        </h3>
-                    </div>
-                    <div style={{ height: 1, background: "rgba(72,24,40,.10)" }} />
                 </div>
             )}
 

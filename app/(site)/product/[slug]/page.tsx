@@ -10,8 +10,7 @@ import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 // Helper to resolve Image URL
 function resolveImageUrl(image: any): string | null {
     if (!image) return null
-    if (typeof image === 'string') return image
-    if (typeof image === 'object' && image.url) return image.url
+    if (typeof image === 'object' && 'url' in image) return image.url
     return null
 }
 

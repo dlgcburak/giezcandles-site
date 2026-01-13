@@ -23,7 +23,7 @@ type Props = {
 }
 
 import { draftMode } from 'next/headers'
-import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { PagePreviewClient } from '@/components/PagePreviewClient'
 
 // ... existing imports
 
@@ -40,6 +40,7 @@ export default async function Page({ params }: Props) {
                 equals: slug,
             },
         },
+        depth: 3,
     })
 
     const page = result.docs?.[0]
@@ -53,18 +54,45 @@ export default async function Page({ params }: Props) {
         await Promise.all(
             page.layout.map(async (block: any) => {
                 if (block.blockType === 'archive' && block.populateBy === 'collection' && block.relation) {
-                    const collectionId = typeof block.relation === 'object' ? block.relation.id : block.relation
+                    // Handle multiple collections
+                    const relations = Array.isArray(block.relation) ? block.relation : [block.relation]
+
+                    // Build a map of collection order for sorting
+                    const collectionOrderMap = new Map<string, number>()
+                    relations.forEach((rel: any, index: number) => {
+                        const id = typeof rel === 'object' ? rel.id : rel
+                        const order = typeof rel === 'object' && rel.order != null ? rel.order : index
+                        collectionOrderMap.set(id, order)
+                    })
+
+                    // Get all collection IDs
+                    const collectionIds = relations.map((rel: any) =>
+                        typeof rel === 'object' ? rel.id : rel
+                    )
+
+                    // Fetch products for all selected collections
                     const productsResult = await payload.find({
                         collection: 'products',
                         where: {
                             collection: {
-                                equals: collectionId,
+                                in: collectionIds,
                             },
                         },
-                        limit: block.limit || 10,
-                        depth: 1,
+                        limit: block.limit || 100,
+                        depth: 2,
                     })
-                    block.populatedDocs = productsResult.docs
+
+                    // Sort products by their collection's order
+                    block.populatedDocs = productsResult.docs.sort((a: any, b: any) => {
+                        const aCollectionId = typeof a.collection === 'object' ? a.collection.id : a.collection
+                        const bCollectionId = typeof b.collection === 'object' ? b.collection.id : b.collection
+                        const aOrder = collectionOrderMap.get(aCollectionId) ?? 999
+                        const bOrder = collectionOrderMap.get(bCollectionId) ?? 999
+                        return aOrder - bOrder
+                    })
+
+                    // Store relations for component to access
+                    block.populatedRelations = relations
                 }
             }),
         )
@@ -72,8 +100,7 @@ export default async function Page({ params }: Props) {
 
     return (
         <main className="min-h-screen bg-background">
-            <RefreshRouteOnSave />
-            <RenderBlocks layout={page.layout} />
+            <PagePreviewClient initialData={page} />
         </main>
     )
 }

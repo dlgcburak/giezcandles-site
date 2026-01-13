@@ -16,9 +16,8 @@ export const Pages: CollectionConfig = {
         description: 'Web sitenizin sayfalarını ve içerik bloklarını buradan yönetebilirsiniz.',
         livePreview: {
             url: ({ data }) => {
-                const protocol = typeof window !== 'undefined' ? window.location.protocol : 'https:'
-                const host = typeof window !== 'undefined' ? window.location.host : ''
-                return `${protocol}//${host}/${data.slug !== 'home' ? data.slug : ''}`
+                const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+                return `${siteUrl}/${data.slug !== 'home' ? data.slug : ''}`
             },
         },
     },

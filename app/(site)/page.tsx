@@ -182,7 +182,7 @@ const FALLBACK_PRODUCTS: ProductDoc[] = [
 // targeting the Page function itself.
 
 import { draftMode } from 'next/headers'
-import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { PagePreviewClient } from '@/components/PagePreviewClient'
 
 // ... imports
 
@@ -199,7 +199,7 @@ export default async function Page() {
         equals: 'home',
       },
     },
-    depth: 2, // Ensure we get image URLs and relation data
+    depth: 3, // Ensure we get image URLs and relation data
   })
 
   const homePage = homePageResult.docs?.[0]
@@ -211,19 +211,45 @@ export default async function Page() {
       await Promise.all(
         homePage.layout.map(async (block: any) => {
           if (block.blockType === 'archive' && block.populateBy === 'collection' && block.relation) {
-            // relation is the collection object (or ID)
-            const collectionId = typeof block.relation === 'object' ? block.relation.id : block.relation
+            // Handle multiple collections
+            const relations = Array.isArray(block.relation) ? block.relation : [block.relation]
+
+            // Build a map of collection order for sorting
+            const collectionOrderMap = new Map<string, number>()
+            relations.forEach((rel: any, index: number) => {
+              const id = typeof rel === 'object' ? rel.id : rel
+              const order = typeof rel === 'object' && rel.order != null ? rel.order : index
+              collectionOrderMap.set(id, order)
+            })
+
+            // Get all collection IDs
+            const collectionIds = relations.map((rel: any) =>
+              typeof rel === 'object' ? rel.id : rel
+            )
+
+            // Fetch products for all selected collections
             const productsResult = await payload.find({
               collection: 'products',
               where: {
                 collection: {
-                  equals: collectionId,
+                  in: collectionIds,
                 },
               },
-              limit: block.limit || 10,
-              depth: 1, // Get image and other refs
+              limit: block.limit || 100,
+              depth: 2,
             })
-            block.populatedDocs = productsResult.docs
+
+            // Sort products by their collection's order
+            block.populatedDocs = productsResult.docs.sort((a: any, b: any) => {
+              const aCollectionId = typeof a.collection === 'object' ? a.collection.id : a.collection
+              const bCollectionId = typeof b.collection === 'object' ? b.collection.id : b.collection
+              const aOrder = collectionOrderMap.get(aCollectionId) ?? 999
+              const bOrder = collectionOrderMap.get(bCollectionId) ?? 999
+              return aOrder - bOrder
+            })
+
+            // Store relations for component to access
+            block.populatedRelations = relations
           }
         }),
       )
@@ -231,8 +257,7 @@ export default async function Page() {
 
     return (
       <main>
-        <RefreshRouteOnSave />
-        <RenderBlocks layout={homePage.layout} />
+        <PagePreviewClient initialData={homePage} />
       </main>
     )
   }

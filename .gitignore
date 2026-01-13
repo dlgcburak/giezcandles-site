@@ -4,3 +4,4 @@ node_modules
 dist
 payload-types.ts
 public/media
+.env.local
