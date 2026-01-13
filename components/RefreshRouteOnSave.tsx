@@ -1,12 +1,15 @@
 'use client'
 
-import { RefreshRouteOnSave as PayloadRefresh } from '@payloadcms/live-preview-react'
-import { useRouter } from 'next/navigation.js'
+import { RefreshRouteOnSave as PayloadLivePreview } from '@payloadcms/live-preview-react'
+import { useRouter } from 'next/navigation'
+import React from 'react'
 
 export const RefreshRouteOnSave = () => {
     const router = useRouter()
-
     return (
-        <PayloadRefresh refresh={router.refresh} serverURL={process.env.NEXT_PUBLIC_SITE_URL || ''} />
+        <PayloadLivePreview
+            refresh={() => router.refresh()}
+            serverURL={process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}
+        />
     )
 }

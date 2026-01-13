@@ -50,7 +50,7 @@ const DashboardWelcome: React.FC = () => {
         <div className="dashboard-welcome">
 
             <div className="dashboard-welcome__actions">
-                <h3 className="dashboard-welcome__subtitle" style={{ marginBottom: '1rem' }}>Hızlı İşlemler</h3>
+                <h3 className="dashboard-welcome__subtitle">Hızlı İşlemler</h3>
                 <div className="actions-grid">
                     <Link href="/admin/collections/products/create" className="action-btn">
                         <span className="action-btn__icon">+</span>
@@ -71,9 +71,9 @@ const DashboardWelcome: React.FC = () => {
                 .dashboard-welcome {
                     margin-bottom: 2rem;
                     padding: 2rem;
-                    background: linear-gradient(135deg, rgba(72, 24, 40, 0.05) 0%, rgba(176, 138, 96, 0.08) 100%);
-                    border-radius: 12px;
-                    border: 1px solid rgba(72, 24, 40, 0.1);
+                    background: #ffffff;
+                    border-radius: 8px;
+                    border: 1px solid #e5e7eb;
                 }
                 .dashboard-welcome__header {
                     display: flex;
@@ -82,61 +82,57 @@ const DashboardWelcome: React.FC = () => {
                     margin-bottom: 2rem;
                 }
                 .dashboard-welcome__logo {
-                    width: 64px;
-                    height: 64px;
-                    border-radius: 12px;
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 6px;
                     object-fit: cover;
-                    box-shadow: 0 4px 12px rgba(72, 24, 40, 0.15);
+                    border: 1px solid #e5e7eb;
                 }
                 .dashboard-welcome__title {
-                    font-family: 'Playfair Display', serif;
-                    font-size: 2rem;
-                    font-weight: 700;
-                    color: #481828;
+                    font-family: inherit;
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color: #111;
                     margin: 0;
                     line-height: 1.2;
+                    letter-spacing: -0.02em;
                 }
                 .dashboard-welcome__subtitle {
-                    font-size: 0.95rem;
-                    color: #784850;
+                    font-size: 0.875rem;
+                    color: #666;
                     margin: 0.25rem 0 0 0;
-                    font-weight: 500;
+                    font-weight: 400;
                 }
                 .dashboard-welcome__stats {
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                    gap: 1.5rem;
-                    margin-bottom: 2.5rem;
+                    gap: 1rem;
+                    margin-bottom: 2rem;
                 }
                 .stat-card {
-                    background: rgba(255, 255, 255, 0.7);
-                    backdrop-filter: blur(12px);
-                    border-radius: 16px;
-                    padding: 1.5rem;
-                    border: 1px solid rgba(72, 24, 40, 0.08);
-                    text-align: center;
-                    transition: all 0.3s ease;
+                    background: #fff;
+                    border-radius: 8px;
+                    padding: 1.25rem;
+                    border: 1px solid #e5e7eb;
+                    text-align: left;
+                    transition: border-color 0.15s ease;
                 }
                 .stat-card:hover {
-                    transform: translateY(-4px);
-                    background: rgba(255, 255, 255, 0.9);
-                    box-shadow: 0 12px 24px -6px rgba(72, 24, 40, 0.12);
-                    border-color: rgba(72, 24, 40, 0.15);
+                    border-color: #000;
                 }
                 .stat-card__number {
-                    font-family: 'Playfair Display', serif;
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                    color: #481828;
+                    font-family: inherit;
+                    font-size: 1.75rem;
+                    font-weight: 600;
+                    color: #111;
                     line-height: 1;
-                    margin-bottom: 0.5rem;
+                    margin-bottom: 0.25rem;
+                    letter-spacing: -0.02em;
                 }
                 .stat-card__label {
                     font-size: 0.75rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: #784850;
-                    font-weight: 600;
+                    color: #666;
+                    font-weight: 500;
                 }
                 .actions-grid {
                     display: grid;
@@ -148,36 +144,34 @@ const DashboardWelcome: React.FC = () => {
                     align-items: center;
                     gap: 0.75rem;
                     background: #fff;
-                    padding: 1rem 1.25rem;
-                    border-radius: 12px;
-                    border: 1px solid rgba(72, 24, 40, 0.1);
-                    color: #481828;
+                    padding: 0.875rem 1rem;
+                    border-radius: 6px;
+                    border: 1px solid #e5e7eb;
+                    color: #111;
                     text-decoration: none;
-                    font-weight: 600;
-                    font-size: 0.9rem;
-                    transition: all 0.2s ease;
+                    font-weight: 500;
+                    font-size: 0.875rem;
+                    transition: all 0.15s ease;
                 }
                 .action-btn:hover {
-                    border-color: #481828;
-                    background: #481828;
-                    color: #fff;
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 12px rgba(72, 24, 40, 0.15);
+                    border-color: #000;
+                    background: #f9f9f9;
+                    transform: translateY(-1px);
                 }
                 .action-btn__icon {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: 24px;
-                    height: 24px;
-                    background: rgba(72, 24, 40, 0.1);
-                    border-radius: 6px;
-                    font-size: 1.2rem;
+                    width: 20px;
+                    height: 20px;
+                    background: #f0f0f0;
+                    color: #666;
+                    border-radius: 4px;
+                    font-size: 1rem;
                     line-height: 1;
-                    transition: all 0.2s ease;
                 }
                 .action-btn:hover .action-btn__icon {
-                    background: rgba(255, 255, 255, 0.2);
+                    background: #000;
                     color: #fff;
                 }
                 .stat-card--loading {

@@ -181,12 +181,19 @@ const FALLBACK_PRODUCTS: ProductDoc[] = [
 // I will just reuse the existing file structure in the replace, 
 // targeting the Page function itself.
 
+import { draftMode } from 'next/headers'
+import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+
+// ... imports
+
 export default async function Page() {
+  const { isEnabled: isDraft } = await draftMode()
   const payload = await getPayload({ config })
 
   // 1. Try to find a dynamic "Home" page
   const homePageResult = await payload.find({
     collection: 'pages',
+    draft: isDraft,
     where: {
       slug: {
         equals: 'home',
@@ -224,10 +231,12 @@ export default async function Page() {
 
     return (
       <main>
+        <RefreshRouteOnSave />
         <RenderBlocks layout={homePage.layout} />
       </main>
     )
   }
+  // ...
 
   // 3. Fallback: Legacy Hardcoded Home
   // ... (Existing logic below)

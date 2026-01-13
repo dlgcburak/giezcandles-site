@@ -22,12 +22,19 @@ type Props = {
     }>
 }
 
+import { draftMode } from 'next/headers'
+import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+
+// ... existing imports
+
 export default async function Page({ params }: Props) {
     const { slug } = await params
+    const { isEnabled: isDraft } = await draftMode()
     const payload = await getPayload({ config })
 
     const result = await payload.find({
         collection: 'pages',
+        draft: isDraft,
         where: {
             slug: {
                 equals: slug,
@@ -65,6 +72,7 @@ export default async function Page({ params }: Props) {
 
     return (
         <main className="min-h-screen bg-background">
+            <RefreshRouteOnSave />
             <RenderBlocks layout={page.layout} />
         </main>
     )

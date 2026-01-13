@@ -14,6 +14,16 @@ export const Pages: CollectionConfig = {
         useAsTitle: 'title',
         defaultColumns: ['title', 'slug', 'updatedAt'],
         description: 'Web sitenizin sayfalarını ve içerik bloklarını buradan yönetebilirsiniz.',
+        livePreview: {
+            url: ({ data }) => {
+                const protocol = typeof window !== 'undefined' ? window.location.protocol : 'https:'
+                const host = typeof window !== 'undefined' ? window.location.host : ''
+                return `${protocol}//${host}/${data.slug !== 'home' ? data.slug : ''}`
+            },
+        },
+    },
+    versions: {
+        drafts: true,
     },
     access: {
         read: () => true,
